@@ -52,7 +52,10 @@ One advantage of packages like `tidyverse` is that sample data is often included
 
 0. Get to know the dataset 'starwars'
 
-
+```R
+starwars
+View(starwars)
+```
 
 1. Who is the shortest character?
 
