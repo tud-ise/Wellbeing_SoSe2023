@@ -15,35 +15,44 @@
 Calculate using RStudio:
 
 1. <img src="https://latex.codecogs.com/png.image?\inline&space;\large&space;\dpi{120}{\color{Emerald}&space;\frac{1}{3}\frac{1&plus;3&plus;5&plus;7&plus;2}{3&space;&plus;&space;5&space;&plus;&space;4}}" title="https://latex.codecogs.com/png.image?\inline \large \dpi{120}{\color{Emerald} \frac{1}{3}\frac{1+3+5+7+2}{3 + 5 + 4}}" />
-
-
+```R
+(1/3)*((1+3+5+7+2)/(3+5+4))
+```
 2. How can you calculate <img src="https://latex.codecogs.com/png.image?\inline&space;\large&space;\dpi{120}{\color{Emerald}&space;e}" title="https://latex.codecogs.com/png.image?\inline \large \dpi{120}{\color{Emerald} e}" /> 
-
-
+```R
+exp(1)
+```
 3. <img src="https://latex.codecogs.com/png.image?\inline&space;\large&space;\dpi{120}{\color{Emerald}&space;\sqrt{2}}" title="https://latex.codecogs.com/png.image?\inline \large \dpi{120}{\color{Emerald} \sqrt{2}}" /> 
-
-
+```R
+sqrt(2)
+```
 4. <img src="https://latex.codecogs.com/png.image?\inline&space;\large&space;\dpi{120}{\color{Emerald}&space;\sqrt[3]{8}}" title="https://latex.codecogs.com/png.image?\inline \large \dpi{120}{\color{Emerald} \sqrt[3]{8}}" /> 
-
-
+```R
+8^(1/3)
+```
 5. <img src="https://latex.codecogs.com/png.image?\inline&space;\large&space;\dpi{120}{\color{Emerald}&space;log_2(8)}" title="https://latex.codecogs.com/png.image?\inline \large \dpi{120}{\color{Emerald} log_2(8)}" /> 
-
-
+```R
+log2(8)
+```
 
 ### Statistical Functions
 
 1. Create a sequence from 0 to 100 in steps of 5
-
-
+```R
+seq(0, 100, 5)
+```
 2. Calculate the mean value of the vector [1, 3, 4, 7, 11, 2].
-
-
+```R
+mean(c(1, 3, 4, 7, 11, 2))
+```
 3. Display the span <img src="https://latex.codecogs.com/png.image?\inline&space;\large&space;\dpi{120}{\color{Emerald}&space;x_{max}&space;-&space;x_{min}}" title="https://latex.codecogs.com/png.image?\inline \large \dpi{120}{\color{Emerald} x_{max} - x_{min}}" /> of this vector.
-
-
+```R
+range(c(1, 3, 4, 7, 11, 2))
+```
 4. Calculate the sum of this vector.
-
-
+```R
+sum(c(1, 3, 4, 7, 11, 2))
+```
 
 ### Data Frames
 One advantage of packages like `tidyverse` is that sample data is often included, making it particularly clear why the packages are useful. We use the tibble `starwars` from the `tidyverse` package.
@@ -58,6 +67,25 @@ View(starwars)
 ```
 
 1. Who is the shortest character?
+```R
+starwars %>% 
+  arrange((height))
+```
 
 2. Find all characters from  Tatooine.
+```R
+starwars %>%
+   filter(hometown == 'Tatooine')
+```
 
+Other questions you might explore:
+
+3. How many droids are there?
+
+4. What is the home world of Han Solo?
+
+5. How many characters are there per species? Sort by ascending count.
+
+6. Change the height from `cm`to `m`.
+
+7. Filter out all characters that have missing values (`NA`) for their mass. How many are left?
