@@ -30,7 +30,7 @@ starwars %>%
     arrange(desc(count))
 ```
 
-4\. Change the height from ´cm´ to ´m´.
+4\. Change the height from `cm` to `m`.
 
 ``` r
 starwars %>%
