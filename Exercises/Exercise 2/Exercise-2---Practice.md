@@ -1,6 +1,8 @@
 Exercise 2 - Practice
 ================
 
+# Welcome to the Star Wars Universe!
+
 ## Recap: Last Week’s `Star Wars`Homework
 
 1\. How many droids are there?
@@ -65,8 +67,6 @@ measured in BBY = Before Battle of Yavin, so high values = earlier)
 
 9\. Which planet has the most droids?
 
-10\. Who is the oldest character of each species?
+10\. Which is the most prevalent eye color on each planet?
 
-11\. Which is the most prevalent eye color on each planet?
-
-12\. How many unique eye colors are there?
+11\. How many unique eye colors are there?
