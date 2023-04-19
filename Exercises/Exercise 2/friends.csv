@@ -1,12 +1,15 @@
-"name","vaccine"
-"Luke","AstraZeneca"
-"Leia","Moderna"
-"Han","BioNTech"
-"Rey",""
-"Chewbacca","J&J"
-"C-3PO","Microsoft"
-"R2-D2","Microsoft"
-"Obi-Wan","BioNTech"
-"JarJar",""
-"Boba","Sputnik V"
-"Bossk",""
+name,smartphone
+Luke,JediCom
+Leia,HoloPhone
+Han,SaberPhone
+Rey,JediCom
+Chewbacca,
+C-3PO,DroidLink
+R2-D2,DroidLink
+Obi-Wan,JediCom
+JarJar,
+Boba,
+Lando,SaberPhone
+Yoda,
+Qui-Gon,JediCom
+Jabba,
