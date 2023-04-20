@@ -27,7 +27,7 @@ case you are curious (this is not part of this exercise).
     dataset and simplify the next steps for you.
 
 ``` r
-> read_csv('./starwars_dd.csv') -> starwars_dd
+> starwars_dd <- read_csv('./starwars_dd.csv')
 ```
 
 4.  Import the `tidyfst` package. Then generate dummies for all films
@@ -40,6 +40,56 @@ case you are curious (this is not part of this exercise).
     (Hint: Each character has multiple rows for each film, vehicle and
     starship)
 
+``` r
+> library(tidyfst)
+> starwars_dd %>% 
++       distinct(name, films, .keep_all=TRUE) %>% 
++       starwars_films_dd <- dummy_dt(films)
+
+> starwars_films_dd <- as_tibble(starwars_films_dd)
+
+> View(starwars_films_dd)
+```
+
 5.  How many characters starred in `A New Hope`?
 
+``` r
+> starwars_films_dd %>% 
++       filter(`films_A New Hope` == 1) %>% 
++       summarise(name, `films_A New Hope`)
+# A tibble: 18 x 2
+name                  `films_A New Hope`
+<chr>                              <dbl>
+1 Beru Whitesun lars                     1
+2 Biggs Darklighter                      1
+3 C-3PO                                  1
+4 Chewbacca                              1
+5 Darth Vader                            1
+6 Greedo                                 1
+7 Han Solo                               1
+8 Jabba Desilijic Tiure                  1
+9 Jek Tono Porkins                       1
+10 Leia Organa                            1
+11 Luke Skywalker                         1
+12 Obi-Wan Kenobi                         1
+13 Owen Lars                              1
+14 R2-D2                                  1
+15 R5-D4                                  1
+16 Raymus Antilles                        1
+17 Wedge Antilles                         1
+18 Wilhuff Tarkin                         1 
+```
+
 6.  Which of those characters are female?
+
+``` r
+> starwars_films_dd %>% 
++       filter(`films_A New Hope` == 1) %>% 
++       filter(sex == 'female') %>% 
++       summarise(name, `films_A New Hope`)
+# A tibble: 2 x 2
+  name               `films_A New Hope`
+  <chr>                           <dbl>
+1 Beru Whitesun lars                  1
+2 Leia Organa                         1
+```
