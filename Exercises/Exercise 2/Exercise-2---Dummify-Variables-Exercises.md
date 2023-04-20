@@ -44,7 +44,7 @@ case you are curious (this is not part of this exercise).
 > library(tidyfst)
 > starwars_dd %>% 
 +       distinct(name, films, .keep_all=TRUE) %>% 
-+       starwars_films_dd <- dummy_dt(films)
++       dummy_dt(films) -> starwars_films_dd
 
 > starwars_films_dd <- as_tibble(starwars_films_dd)
 
@@ -79,6 +79,29 @@ name                  `films_A New Hope`
 17 Wedge Antilles                         1
 18 Wilhuff Tarkin                         1 
 ```
+
+:heavy_exclamation_mark: **In the exercise, this call did not work
+because we confused single quotes (`'`) with backticks (`` ` ``)**.
+
+In R, the backtick character is used to enclose column names that
+include spaces, reserved words, or other special characters. This is
+because column names with spaces or special characters may cause syntax
+errors when they are not enclosed properly.
+
+For example, suppose you have a data frame with a column named “First
+Name”. If you try to reference this column using single quotes or double
+quotes like `df['First Name']` or `df["First Name"]`, you may get an
+error message like `"Error: object 'First' not found"` because R
+interprets the space as a separation between two different objects.
+
+To avoid this error, you can enclose the column name in backticks like
+\`df\$\`First Name\`\` or \`df\[\[“First Name”\]\]\`. The backticks tell
+R to treat everything inside them as a single entity, so the column name
+with spaces is interpreted correctly.
+
+Alternatively, you can also rename the column to remove the spaces or
+special characters using the `colnames()` function, for example:
+`colnames(df)[2] <- "FirstName"`.
 
 6.  Which of those characters are female?
 
