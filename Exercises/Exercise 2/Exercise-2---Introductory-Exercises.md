@@ -217,32 +217,11 @@ measured in BBY = Before Battle of Yavin, so high values = earlier)
 
 ``` r
 > starwars %>%
-+     filter(!is.na(birth_year)) %>%
-+     filter(!is.na(species)) %>%
-+     group_by(species, name) %>%
-+     summarise(by = max(birth_year)) %>%
-+     group_by(species) %>%
-+     slice(which.max(by))
-`summarise()` has grouped output by 'species'. You can override using the `.groups` argument.
-# A tibble: 15 x 3
-# Groups:   species [15]
-   species        name                     by
-   <chr>          <chr>                 <dbl>
- 1 Cerean         Ki-Adi-Mundi             92
- 2 Droid          C-3PO                   112
- 3 Ewok           Wicket Systri Warrick     8
- 4 Gungan         Jar Jar Binks            52
- 5 Human          Dooku                   102
- 6 Hutt           Jabba Desilijic Tiure   600
- 7 Kel Dor        Plo Koon                 22
- 8 Mirialan       Luminara Unduli          58
- 9 Mon Calamari   Ackbar                   41
-10 Rodian         Greedo                   44
-11 Trandoshan     Bossk                    53
-12 Twi'lek        Ayla Secura              48
-13 Wookiee        Chewbacca               200
-14 Yoda's species Yoda                    896
-15 Zabrak         Darth Maul               54
++       group_by(homeworld, eye_color) %>% 
++       mutate(rank = row_number()) %>% 
++       group_by(homeworld) %>% 
++       slice(which.max(rank)) %>% 
++       summarise(homeworld, eye_color, rank)
 ```
 
 11\. How many unique eye colors are there?
