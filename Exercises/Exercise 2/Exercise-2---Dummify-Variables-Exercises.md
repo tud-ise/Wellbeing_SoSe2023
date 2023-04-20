@@ -80,6 +80,8 @@ name                  `films_A New Hope`
 18 Wilhuff Tarkin                         1 
 ```
 
+------------------------------------------------------------------------
+
 :heavy_exclamation_mark: **In the exercise, this call did not work
 because we confused single quotes (`'`) with backticks (`` ` ``)**.
 
@@ -102,6 +104,8 @@ with spaces is interpreted correctly.
 Alternatively, you can also rename the column to remove the spaces or
 special characters using the `colnames()` function, for example:
 `colnames(df)[2] <- "FirstName"`.
+
+------------------------------------------------------------------------
 
 6.  Which of those characters are female?
 
