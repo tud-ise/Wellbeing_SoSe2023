@@ -99,7 +99,7 @@ Comparison of male and female.
 
 or
 
-      aggregate(df$FRUITS_VEGGIES, list(df&GENDER))
+      aggregate(df$FRUITS_VEGGIES, list(df&GENDER), mean)
 
 What is the standard deviation of `Fruits_Veggies`?
 
