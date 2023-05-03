@@ -106,7 +106,6 @@ type of `id`, `sex` and `wellness_act` into `factors`:
     df$sex = as.factor(df$sex)
     df$wellness_act = as.factor(df$wellness_act)
 
-test = data
 
 Test if all transformations were successful:
 
