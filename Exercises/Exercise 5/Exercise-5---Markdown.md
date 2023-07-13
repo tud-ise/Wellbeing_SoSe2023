@@ -64,7 +64,8 @@ repository](https://github.com/tud-ise/Wellbeing_SoSe2023/blob/main/Exercises/Ex
 
 **Open the data set**
 
-data = read.csv2(“/*Your Path*/wellbeing_data.csv” ) df_input = data
+data = read.csv2(“/*Your Path*/wellbeing_data.csv” ) 
+df_input = data
 
 **Check the data structure**
 
