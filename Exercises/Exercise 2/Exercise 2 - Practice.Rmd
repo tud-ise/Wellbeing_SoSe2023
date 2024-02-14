@@ -1,0 +1,190 @@
+---
+title: "Exercise 2 - Practice"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Welcome to the Star Wars Universe!
+
+## Recap: Last Week's `Star Wars`Homework
+
+1\. How many droids are there?
+
+```{r eval=FALSE, include=TRUE}
+starwars %>%
+   filter(species == 'Droid') %>%
+   summarise(n())
+```
+
+2\. What is the home world of Han Solo?
+
+```{r eval=FALSE, include=TRUE}
+starwars %>%
+   select(name, homeworld) %>%
+   filter(name == 'Han Solo')
+```
+
+3\. How many characters are there per species? Sort by ascending count.
+
+```{r eval=FALSE, include=TRUE}
+starwars %>%
+    group_by(species) %>%
+    summarise(count = n()) %>%
+    arrange(desc(count))
+```
+
+4\. Change the height from ´cm´ to ´m´.
+
+```{r eval=FALSE, include=TRUE}
+starwars %>%
+   mutate(height = height / 100)
+```
+
+5\. Filter out all characters that have missing values (´NA`) for their mass. How many are left?
+
+```{r eval=FALSE, include=TRUE}
+starwars %>%
+   select(name, mass) %>%
+   na.omit()
+```
+
+## Further `Star Wars` Tasks - Breakout Rooms
+
+1\. Find all characters with yellow eyes.
+
+2\. Remove all Gungans. How many characters are left?
+
+3\. What is the average mass of all droids?
+
+4\. Calculate the BMI for all humans (\`mass / ((height / 100) ^ 2)\`)
+
+5\. Which character has the longest name?
+
+6\. What is the earliest birth year for each species (\`birth_year\` is measured in BBY = Before Battle of Yavin, so high values = earlier)
+
+7\. What are the most populated planets?
+
+8\. What is the average height of all female humans?
+
+9\. Which planet has the most droids? 
+
+10\. Which is the most prevalent eye color on each planet?
+
+11\. How many unique eye colors are there?
+
+## Dummify Variables
+
+1.  Install the `tidyfst` package: `install.packages("tidyfst")`.
+    Afterwards, load it with `library(tidyfst)`.
+
+2.  Download the `starwars_dd.csv` file from GitHub. For ease of use:
+    place it in the folder which is shown in the `Files` section of
+    RStudio.
+
+The following code was used to generate the `starwars_dd.csv` file, in
+case you are curious (this is not part of this exercise).
+
+``` r
+> library(tidyverse)
+> starwars %>% 
++       unnest(cols=films,keep_empty=TRUE) %>% 
++       unnest(cols=vehicles, keep_empty=TRUE) %>% 
++       unnest(cols=starships, keep_empty=TRUE) %>%
++       write.csv('./starwars_dd.csv')
+```
+
+3.  Import `starwars_dd.csv` into a variable named `starwars_dd`. The
+    contents are different from the tidyverse-internal `starwars`
+    dataset and simplify the next steps for you.
+    
+``` r
+> read_csv('./starwars_dd.csv') -> starwars_dd
+```
+
+4.  Import the `tidyfst` package. Then generate dummies for all films
+    and store them in the variable `starwars_films_dd`. Inspect them in
+    RStudio (using the `View` function) afterwards. You may use the
+    [:book:
+    `dummy_dt`](https://www.rdocumentation.org/packages/tidyfst/versions/0.9.9/topics/dummy_dt)
+    function from `tidyfst`. Make sure to exclude rows which hold no
+    additional information, we are focusing on the different films here
+    (Hint: Each character has multiple rows for each film, vehicle and
+    starship)
+    
+``` r
+> library(tidyfst)
+> starwars_dd %>% 
++       distinct(name, films, .keep_all=TRUE) %>% 
++       dummy_dt(films) ->
++       starwars_films_dd
+> starwars_films_dd <- as_tibble(starwars_films_dd)
+> View(starwars_films_dd)
+```
+
+5.  How many characters starred in `A New Hope`?
+
+``` r
+> starwars_films_dd %>% 
++       filter(`films_A New Hope` == 1) %>% 
++       summarise(name, `films_A New Hope`)
+# A tibble: 18 x 2
+name                  `films_A New Hope`
+<chr>                              <dbl>
+1 Beru Whitesun lars                     1
+2 Biggs Darklighter                      1
+3 C-3PO                                  1
+4 Chewbacca                              1
+5 Darth Vader                            1
+6 Greedo                                 1
+7 Han Solo                               1
+8 Jabba Desilijic Tiure                  1
+9 Jek Tono Porkins                       1
+10 Leia Organa                            1
+11 Luke Skywalker                         1
+12 Obi-Wan Kenobi                         1
+13 Owen Lars                              1
+14 R2-D2                                  1
+15 R5-D4                                  1
+16 Raymus Antilles                        1
+17 Wedge Antilles                         1
+18 Wilhuff Tarkin                         1 
+```
+
+6.  Which of those characters are female?
+
+## May the Functions Be With You
+#### Mastering Function Definition and Manipulation in R with the Star Wars Universe
+Complete the following tasks using the `starwars` dataset from the tidyverse package:
+
+Example: Define a function that takes a character's name as an argument and returns their species.
+
+```{r eval=FALSE, include=TRUE}
+get_species <- function(name) {
+  species <- starwars %>% filter(name == !!name) %>% select(species) %>% pull()
+  return(species)
+}
+
+get_species("Luke Skywalker")
+```
+
+The `!!` before the name argument is a syntax called "bang bang" operator, which tells R to evaluate the argument immediately instead of delaying it. This is because the argument name is used within the filter function, which requires immediate evaluation of the argument.
+
+1\. Define a function that takes in a character's name and returns a dataframe containing the name, birth year, and species of that character.
+
+
+2\. Define a function that takes in a character's name and returns their height in meters.
+
+
+3\. Define a function that takes in a planet's name and returns the number of characters whose homeworld is this planet.
+
+
+4\. Define a function that takes in a planet name and returns a dataframe containing the names and heights of all characters from that planet, sorted by height in descending order.
+
+
+5\. Define a function that takes a character's name as an argument and returns the average height of all characters from the same species as that character.
+
+
+6\. Define a function that takes in a character's name and a planet name, and returns a dataframe containing the name and gender of all characters from that planet who share the same gender as the input character.

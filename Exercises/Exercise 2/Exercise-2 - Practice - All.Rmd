@@ -1,0 +1,135 @@
+---
+title: "Exercise 2 - Practice"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Welcome to the Star Wars Universe!
+
+## Recap: Last Week's `Star Wars`Homework
+
+1\. How many droids are there?
+
+```{r}
+library(tidyverse)
+data(starwars)
+```
+
+```{r}
+starwars %>%
+   filter(species == 'Droid') %>%
+   summarise(n())
+```
+
+2\. What is the home world of Han Solo?
+
+```{r}
+starwars %>%
+   select(name, homeworld) %>%
+   filter(name == 'Han Solo')
+```
+
+3\. How many characters are there per species? Sort by ascending count.
+
+```{r}
+starwars %>%
+    group_by(species) %>%
+    summarise(count = n()) %>%
+    arrange(desc(count))
+```
+
+4\. Change the height from ´cm´ to ´m´.
+
+```{r}
+starwars %>%
+   mutate(height = height / 100)
+```
+
+5\. Filter out all characters that have missing values (´NA`) for their mass. How many are left?
+
+```{r}
+starwars %>%
+   select(name, mass) %>%
+   na.omit()
+```
+
+## Further `Star Wars` Tasks - Breakout Rooms
+
+1\. Find all characters with yellow eyes.
+
+2\. Remove all Gungans. How many characters are left?
+
+3\. What is the average mass of all droids?
+
+4\. Calculate the BMI for all humans (\`mass / ((height / 100) ^ 2)\`)
+
+5\. Which character has the longest name?
+
+6\. What is the earliest birth year for each species (\`birth_year\` is measured in BBY = Before Battle of Yavin, so high values = earlier)
+
+7\. What are the most populated planets?
+
+8\. What is the average height of all female humans?
+
+9\. Which planet has the most droids? 
+
+10\. Who is the oldest character of each species?
+
+11\. Which is the most prevalent eye color on each planet?
+
+12\. How many unique eye colors are there?
+
+## May the Functions Be With You
+#### Mastering Function Definition and Manipulation in R with the Star Wars Universe
+Complete the following tasks using the `starwars` dataset from the tidyverse package:
+
+1\. Define a function that takes a character's name as an argument and returns their species.
+
+```{r}
+get_species <- function(name) {
+  species <- starwars %>% filter(name == !!name) %>% select(species) %>% pull()
+  return(species)
+}
+
+get_species("Luke Skywalker")
+```
+
+The `!!` before the name argument is a syntax called "bang bang" operator, which tells R to evaluate the argument immediately instead of delaying it. This is because the argument name is used within the filter function, which requires immediate evaluation of the argument.
+
+2\. Define a function that takes a planet's name as an argument and returns the number of characters from the `starwars` dataset that come from that planet.
+
+```{r}
+get_num_characters_from_planet <- function(planet_name) {
+  num_characters <- starwars %>% filter(homeworld == !!planet_name) %>% nrow()
+  return(num_characters)
+}
+get_num_characters_from_planet("Tatooine")
+
+```
+
+3\. Define a function that takes a character's name as an argument and returns a dataframe with their name, species, homeworld, and films they appeared in.
+
+```{r}
+
+```
+
+4\. Define a function that takes a character's name as an argument and returns the average height of all characters from the same species as that character.
+
+```{r}
+get_avg_height_same_species <- function(name) {
+  species <- starwars %>% filter(name == !!name) %>% select(species) %>% pull()
+  avg_height <- starwars %>% filter(species == !!species) %>% summarise(avg_height = mean(height, na.rm = TRUE)) %>% pull()
+  return(avg_height)
+}
+get_avg_height_same_species("Luke Skywalker")
+
+```
+
+5\. Define a function that takes a planet name as an argument and returns the name, climate, terrain, and population of each species that lives on that planet. If no species live on the planet, the function should return a message saying so.
+
+```{r}
+
+```
